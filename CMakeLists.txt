@@ -8,6 +8,11 @@ if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Release)
 endif()
 
+# Fix MSVC file encoding (C4819 / C2001) for cross-platform C++ strings and comments
+if(MSVC)
+    add_compile_options(/utf-8)
+endif()
+
 # ---- locate ncnn ----------------------------------------------------------
 # Point -DncnnDIR=/path/to/ncnn/build/install/lib/cmake/ncnn at an installed
 # ncnn, or -Dncnn_DIR / -DNCNN_BUILD_DIR at an in-tree build dir. We first try
