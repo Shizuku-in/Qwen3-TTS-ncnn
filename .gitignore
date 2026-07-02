@@ -1,0 +1,41 @@
+# ==== Model weights / large binaries — NEVER commit ====
+# ncnn converted weights (regenerate via tools/convert)
+*.bin
+*.pt
+*.onnx
+*.safetensors
+
+# pnnx intermediate / build outputs
+pnnx_out/
+*.pnnx.param
+*_pnnx.py
+*_ncnn.py
+
+# downloaded HuggingFace / ModelScope checkpoints
+models/
+weights/
+
+# ==== Python ====
+__pycache__/
+*.py[cod]
+.venv*/
+venv/
+*.egg-info/
+.ipynb_checkpoints/
+
+# ==== C++ / CMake build ====
+build/
+cmake-build-*/
+*.o
+*.a
+*.so
+
+# ==== Audio scratch (keep only curated golden refs under tests/golden) ====
+*.wav
+!tests/golden/*.wav
+
+# ==== Editor / OS ====
+.vscode/
+.idea/
+.DS_Store
+*.swp

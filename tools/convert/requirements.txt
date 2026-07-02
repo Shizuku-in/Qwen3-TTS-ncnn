@@ -1,0 +1,18 @@
+# Conversion environment for Qwen3-TTS-ncnn (Python 3.12).
+#
+# Install with uv (recommended):
+#   uv venv .venv-tts --python 3.12
+#   uv pip install --python .venv-tts -r tools/convert/requirements.txt
+#
+# NOTE on torch: install a build matching your GPU arch AFTER these. Blackwell
+# (RTX 50xx, sm_120) needs cu128 or newer, e.g.:
+#   uv pip install --python .venv-tts torch --index-url https://download.pytorch.org/whl/cu128
+# CPU-only conversion also works (slower); the reference generation uses CUDA.
+
+qwen-tts
+pnnx
+ncnn
+transformers==4.57.3
+numpy==2.3.5          # numba (via librosa in qwen_tts) requires numpy <= 2.4
+soundfile
+librosa
