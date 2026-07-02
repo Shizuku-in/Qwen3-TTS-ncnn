@@ -27,8 +27,8 @@ convolutional RVQ decoder — no diffusion / BigVGAN.
 | P0 | PyTorch reference + deterministic golden dump | ✅ done |
 | P2 | Talker (28-layer) → ncnn, kv-cache patch, parity | ✅ converted, cosine-sim 1.000 vs PyTorch |
 | P3 | Code Predictor (5-layer) → ncnn, parity | ✅ converted, cosine-sim 1.000 vs PyTorch |
-| P4 | Speech Decoder (RVQ + custom conv layers) | ⏳ next |
-| P1/P5 | C++ AR decode loop + end-to-end + WAV | ⏳ pending |
+| P4 | Speech Decoder: transformer + conv stack + RVQ dequant → ncnn | ✅ converted, cosine-sim 1.000 vs PyTorch (each stage) |
+| P1/P5 | C++ AR decode loop + end-to-end + WAV | ⏳ next |
 | — | Windows + Linux CMake build | ⏳ pending |
 
 ## Repository layout
