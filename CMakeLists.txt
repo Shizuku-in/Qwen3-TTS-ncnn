@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 project(qwen3_tts_ncnn CXX)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 if(NOT CMAKE_BUILD_TYPE)
@@ -43,7 +43,8 @@ target_link_libraries(qwen3_tts_core INTERFACE ncnn)
 
 # ---- main synthesizer (built once src/qwen3_tts.cpp exists) ----------------
 if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/src/qwen3_tts.cpp)
-    add_executable(qwen3_tts src/qwen3_tts.cpp)
+    add_executable(qwen3_tts src/qwen3_tts.cpp src/tokenizer/bpe_tokenizer.cpp)
+    target_include_directories(qwen3_tts PRIVATE src src/tokenizer)
     target_link_libraries(qwen3_tts PRIVATE qwen3_tts_core)
 endif()
 
@@ -64,3 +65,8 @@ add_test(NAME vocoder COMMAND test_vocoder)
 add_executable(test_ar_loop tests/test_ar_loop.cpp)
 target_link_libraries(test_ar_loop PRIVATE qwen3_tts_core)
 add_test(NAME ar_loop COMMAND test_ar_loop)
+
+# BPE tokenizer parity: vendored tokenizer must match Python token ids
+add_executable(test_tokenizer tests/test_tokenizer.cpp src/tokenizer/bpe_tokenizer.cpp)
+target_include_directories(test_tokenizer PRIVATE src)
+add_test(NAME tokenizer COMMAND test_tokenizer)
