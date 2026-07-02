@@ -59,3 +59,8 @@ add_test(NAME convtail COMMAND test_convtail)
 add_executable(test_vocoder tests/test_vocoder.cpp)
 target_link_libraries(test_vocoder PRIVATE qwen3_tts_core)
 add_test(NAME vocoder COMMAND test_vocoder)
+
+# AR decode loop: Talker outer + Code Predictor nested, validated vs golden codes
+add_executable(test_ar_loop tests/test_ar_loop.cpp)
+target_link_libraries(test_ar_loop PRIVATE qwen3_tts_core)
+add_test(NAME ar_loop COMMAND test_ar_loop)
